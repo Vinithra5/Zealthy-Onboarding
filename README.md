@@ -1,3 +1,7 @@
+## Live Demo
+
+[Live Site](https://zealthy-onboarding-eta.vercel.app)
+
 # Zealthy Onboarding – Web App
 
 This is a simple onboarding platform built with Next.js and MongoDB. It was developed as part of a technical assessment to demonstrate how I handle full-stack development using modern tools.
@@ -40,4 +44,4 @@ This is a simple onboarding platform built with Next.js and MongoDB. It was deve
 5. Start the development server:
     ```bash
    npm run dev
-
+6. 
