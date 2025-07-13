@@ -34,8 +34,10 @@ This is a simple onboarding platform built with Next.js and MongoDB. It was deve
    npm install --legacy-peer-deps
 
 3. Create a .env.local file in the root folder and add:
+    ```bash
    MONGODB_URI=your_mongodb_connection_string
 
-4. Start the development server:
+5. Start the development server:
+    ```bash
    npm run dev
 
