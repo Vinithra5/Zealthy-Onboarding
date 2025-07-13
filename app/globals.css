@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.bg-cream-50 {
+  background-color: #fefdf8;
+}
+
+.bg-sage-50 {
+  background-color: #f0f9f4;
+}
+
+.bg-sage-100 {
+  background-color: #dcfce7;
+}
+
+.text-sage-500 {
+  color: #22c55e;
+}
+
+.text-sage-600 {
+  color: #16a34a;
+}
+
+.text-sage-700 {
+  color: #15803d;
+}
+
+.text-sage-800 {
+  color: #166534;
+}
+
+.bg-sage-500 {
+  background-color: #22c55e;
+}
+
+.bg-sage-600 {
+  background-color: #16a34a;
+}
+
+.border-sage-100 {
+  border-color: #dcfce7;
+}
+
+.border-sage-200 {
+  border-color: #bbf7d0;
+}
+
+.border-sage-300 {
+  border-color: #86efac;
+}
+
+.border-sage-400 {
+  border-color: #4ade80;
+}
+
+.hover\:bg-sage-50:hover {
+  background-color: #f0f9f4;
+}
+
+.hover\:bg-sage-600:hover {
+  background-color: #16a34a;
+}
+
+.focus\:border-sage-400:focus {
+  border-color: #4ade80;
+}
+
+.focus\:ring-sage-400:focus {
+  --tw-ring-color: #4ade80;
+}
+
+.focus\:ring-sage-500:focus {
+  --tw-ring-color: #22c55e;
+}

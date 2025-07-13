@@ -1,0 +1,32 @@
+import { type NextRequest, NextResponse } from "next/server"
+
+export async function POST(request: NextRequest) {
+  try {
+    const { default: clientPromise } = await import("@/lib/mongodb")
+
+    const client = await clientPromise
+    const db = client.db("zealthy-onboarding")
+    const userData = await request.json()
+
+    const result = await db.collection("users").updateOne(
+      { email: userData.email },
+      {
+        $set: {
+          ...userData,
+          isCompleted: true,
+          completedAt: new Date(),
+          updatedAt: new Date(),
+        },
+        $setOnInsert: {
+          createdAt: new Date(),
+        },
+      },
+      { upsert: true },
+    )
+
+    return NextResponse.json({ success: true, id: result.upsertedId })
+  } catch (error) {
+    console.error("Error completing user:", error)
+    return NextResponse.json({ error: "Failed to complete user" }, { status: 500 })
+  }
+}
