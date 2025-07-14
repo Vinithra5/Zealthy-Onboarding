@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export function Navbar() {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   const navItems = [
     { href: "/", label: "Onboarding" },
     { href: "/admin", label: "Admin" },
     { href: "/data", label: "Data" },
-  ];
+  ]
 
   return (
     <nav className="fixed top-2 left-0 right-0 z-50 bg-white border-b border-sage-100 shadow-sm">
@@ -23,11 +23,9 @@ export function Navbar() {
               className="hidden md:block h-12 w-auto object-contain mr-6 pt-[2px]"
               style={{ height: "70px", objectFit: "contain" }}
               onError={(e) => {
-                console.error("Main logo failed to load");
-                e.currentTarget.onerror = null;
-                e.currentTarget.src = "/zealthy-icon.png";
-                e.currentTarget.className =
-                  "hidden md:block h-12 w-auto object-contain mr-6 pt-[2px]";
+                e.currentTarget.onerror = null
+                e.currentTarget.src = "/zealthy-icon.png"
+                e.currentTarget.className = "hidden md:block h-12 w-auto object-contain mr-6 pt-[2px]"
               }}
             />
 
@@ -37,8 +35,7 @@ export function Navbar() {
               className="block md:hidden h-11 w-auto object-contain pt-[2px]"
               style={{ height: "44px", objectFit: "contain" }}
               onError={(e) => {
-                console.error("Mobile logo failed to load");
-                e.currentTarget.style.display = "none";
+                e.currentTarget.style.display = "none"
               }}
             />
           </Link>
@@ -49,9 +46,7 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={`font-medium transition-colors ${
-                  pathname === item.href
-                    ? "text-sage-600"
-                    : "text-gray-700 hover:text-sage-600"
+                  pathname === item.href ? "text-sage-600" : "text-gray-700 hover:text-sage-600"
                 }`}
               >
                 {item.label}
@@ -61,5 +56,5 @@ export function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }

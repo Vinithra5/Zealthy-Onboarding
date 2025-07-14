@@ -9,7 +9,6 @@ export async function GET() {
 
   try {
     if (!process.env.MONGODB_URI) {
-      console.error("MONGODB_URI environment variable is not set")
       return NextResponse.json(
         {
           error: "Database configuration error",
@@ -24,12 +23,11 @@ export async function GET() {
     try {
       const mongoModule = await import("@/lib/mongodb")
       clientPromise = mongoModule.default
-    } catch (importError) {
-      console.error("Failed to import MongoDB module:", importError)
+    } catch (importError: unknown) {
       return NextResponse.json(
         {
           error: "MongoDB module import failed",
-          message: importError?.message || "Failed to import MongoDB client",
+          message: importError instanceof Error ? importError.message : "Failed to import MongoDB client",
           users: [],
         },
         { status: 500, headers },
@@ -42,12 +40,11 @@ export async function GET() {
         clientPromise,
         new Promise((_, reject) => setTimeout(() => reject(new Error("Connection timeout after 15 seconds")), 15000)),
       ])
-    } catch (connectionError) {
-      console.error("MongoDB connection failed:", connectionError)
+    } catch (connectionError: unknown) {
       return NextResponse.json(
         {
           error: "Database connection failed",
-          message: connectionError?.message || "Failed to connect to MongoDB",
+          message: connectionError instanceof Error ? connectionError.message : "Failed to connect to MongoDB",
           users: [],
         },
         { status: 500, headers },
@@ -57,12 +54,11 @@ export async function GET() {
     let db
     try {
       db = client.db("zealthy-onboarding")
-    } catch (dbError) {
-      console.error("Database access failed:", dbError)
+    } catch (dbError: unknown) {
       return NextResponse.json(
         {
           error: "Database access failed",
-          message: dbError?.message || "Failed to access database",
+          message: dbError instanceof Error ? dbError.message : "Failed to access database",
           users: [],
         },
         { status: 500, headers },
@@ -75,12 +71,11 @@ export async function GET() {
         db.collection("users").find({}).sort({ createdAt: -1 }).limit(50).toArray(),
         new Promise((_, reject) => setTimeout(() => reject(new Error("Query timeout after 10 seconds")), 10000)),
       ])
-    } catch (queryError) {
-      console.error("Query failed:", queryError)
+    } catch (queryError: unknown) {
       return NextResponse.json(
         {
           error: "Database query failed",
-          message: queryError?.message || "Failed to query users",
+          message: queryError instanceof Error ? queryError.message : "Failed to query users",
           users: [],
         },
         { status: 500, headers },
@@ -90,18 +85,11 @@ export async function GET() {
     const safeUsers = Array.isArray(users) ? users : []
 
     return NextResponse.json(safeUsers, { headers })
-  } catch (error) {
-    console.error("=== USERS API FATAL ERROR ===")
-    console.error("Error details:", {
-      message: error?.message || "Unknown error",
-      name: error?.name || "Unknown",
-      stack: error?.stack || "No stack trace",
-    })
-
+  } catch (error: unknown) {
     return NextResponse.json(
       {
         error: "Internal server error",
-        message: error?.message || "An unexpected error occurred",
+        message: error instanceof Error ? error.message : "An unexpected error occurred",
         users: [],
       },
       { status: 500, headers },

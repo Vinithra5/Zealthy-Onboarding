@@ -25,8 +25,7 @@ export async function POST(request: NextRequest) {
     )
 
     return NextResponse.json({ success: true, id: result.upsertedId })
-  } catch (error) {
-    console.error("Error completing user:", error)
+  } catch {
     return NextResponse.json({ error: "Failed to complete user" }, { status: 500 })
   }
 }

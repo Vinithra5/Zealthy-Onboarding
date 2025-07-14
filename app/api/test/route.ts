@@ -12,11 +12,11 @@ export async function GET() {
       mongoUriLength,
       timestamp: new Date().toISOString(),
     })
-  } catch (error) {
+  } catch (error: unknown) {
     return NextResponse.json(
       {
         error: "Test API failed",
-        message: error?.message || "Unknown error",
+        message: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 },
     )

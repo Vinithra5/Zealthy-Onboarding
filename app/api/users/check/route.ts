@@ -16,8 +16,7 @@ export async function GET(request: NextRequest) {
     const user = await db.collection("users").findOne({ email })
 
     return NextResponse.json(user)
-  } catch (error) {
-    console.error("Error checking user:", error)
+  } catch {
     return NextResponse.json({ error: "Failed to check user" }, { status: 500 })
   }
 }

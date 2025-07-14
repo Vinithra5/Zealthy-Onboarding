@@ -25,9 +25,7 @@ export async function GET() {
       step2Components: config.step2Components || ["aboutMe"],
       step3Components: config.step3Components || ["birthdate", "address"],
     })
-  } catch (error) {
-    console.error("Error fetching config:", error)
-
+  } catch {
     return NextResponse.json({
       step2Components: ["aboutMe"],
       step3Components: ["birthdate", "address"],
@@ -56,8 +54,7 @@ export async function POST(request: Request) {
     )
 
     return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error("Error saving config:", error)
+  } catch {
     return NextResponse.json({ error: "Failed to save config" }, { status: 500 })
   }
 }
