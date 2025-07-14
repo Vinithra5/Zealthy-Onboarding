@@ -44,4 +44,3 @@ This is a simple onboarding platform built with Next.js and MongoDB. It was deve
 5. Start the development server:
     ```bash
    npm run dev
-6. 
